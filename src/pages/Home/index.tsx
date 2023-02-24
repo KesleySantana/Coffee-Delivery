@@ -8,7 +8,7 @@ export function Home() {
     return(
         <HomeContainer>
          <Aside />
-         <Shop />
+         <Shop  />
         </HomeContainer>
     )
 }

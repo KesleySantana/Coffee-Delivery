@@ -1,26 +1,27 @@
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Minus, Money } from "phosphor-react";
-import { CoffeeSelected } from "./components/CoffeeSelected";
+import { CoffeeSelected } from "../Home/components/Card/CardSelected";
 import { CheckoutContainer, Form, FormContainer, Info, Label, PayContainer, Payment, SectionForm, SectionInfo, Title, TitleForm } from "./styled";
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import * as zod from 'zod';
 import { number } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { NavLink } from 'react-router-dom';
 
 
-interface Client {
+interface IClient {
+    nome: string,
+    CEP: string,
     rua:string,
     numero:string,
     cidade:string,
     bairro:string,
-    UF:string,
-    formPayment:string
+    UF:string
 }
 
 
 const confirmedOrderValidationSchema = zod.object({
+    Nome: zod.string().min(2).max(50),
     CEP: zod.string().min(9).max(9),  
     Rua: zod.string().min(1).max(50),
     Numero: zod.string().min(1).max(5),
@@ -34,12 +35,14 @@ type ConfirmedOrder = zod.infer<typeof confirmedOrderValidationSchema>
 
 
 export function Checkout() {
-const [client, setClient] = useState<Client[]>([])
+const [client, setClient] = useState({} as IClient[])
+const [formPayment, setFormPayment] = useState<string>('')
 
     const { register, handleSubmit, formState: { errors, isSubmitting }, watch, reset } = useForm<ConfirmedOrder>({
         resolver: zodResolver(confirmedOrderValidationSchema),
         defaultValues: {
-            CEP:'',
+            Nome: '',
+            CEP: '',
             Rua: '',
             Numero: '',
             Complemento: '',
@@ -49,29 +52,39 @@ const [client, setClient] = useState<Client[]>([])
         }
     })
 
+    useEffect(()=> {
+        if(client.length > 0) {
+            console.log(client, formPayment)
+        }
+    }, [client, formPayment])
+
 
     function handleConfirmOrder(data:ConfirmedOrder) {
-        console.log(data)
-        const client = {
+        const newClient = {
+            nome: data.Nome,
+            CEP: data.CEP,
             rua:data.Rua,
-            numero:data.Numero,
+            numero: data.Numero,
             cidade:data.Cidade,
             bairro:data.Bairro,
-            UF:data.UF,
-      
+            UF:data.UF.toUpperCase(),
         }
+        setClient([newClient])
         reset()
     }
 
-    function handleSendCartãoDeCredito() {
-        console.log('cartão de crédito')
-    }
-    function handleSendCartãoDeDébito() {
-        console.log('cartão de débito')
-    }
-    function handleSendDinheiro() {
-        console.log('Dinheiro')
-    }
+    function handleChangeFormPayment(form: 'Dinheiro' | 'Cartão de Crédito' | 'Cartão de Débito') {
+        if(form === 'Dinheiro'){
+            setFormPayment('Dinheiro')
+        }
+        if(form === 'Cartão de Crédito'){
+            setFormPayment('Cartão de Crédito')
+        }
+        if(form === 'Cartão de Débito'){
+            setFormPayment('Cartão de Débito')
+        }
+    }   
+
 
     return(
         <CheckoutContainer>
@@ -87,9 +100,14 @@ const [client, setClient] = useState<Client[]>([])
                     </TitleForm>
                     <form action="" id="form">
                         <Form>
-                            <input type="text" placeholder="CEP" id="CEP" {...register('CEP', {
-                                required:true, 
-                                } )}/>
+                            <div className="DivInputs">
+                                <input type="text" placeholder="Nome" id="Nome" {...register('Nome', {
+                                    required:true,
+                                    } )}/>
+                                <input type="text" placeholder="CEP" id="CEP" {...register('CEP', {
+                                    required:true,
+                                    } )}/>
+                            </div>
                             
                             <input type="text" placeholder="Rua" id="Rua" {...register('Rua', {
                                 required:true,
@@ -125,15 +143,17 @@ const [client, setClient] = useState<Client[]>([])
                                 </div>
                             </Label>
                             <Payment>
-                                < button type="button" onClick={handleSendCartãoDeCredito}>
+                                < button type="button" >
                                     <CreditCard size={16} color='#8047F8' />
                                     Cartão de Crédito
-                                </ button >
-                                < button type="button" onClick={handleSendCartãoDeDébito}>
+                                </ button >             
+                
+                                < button type="button" onClick={()=>handleChangeFormPayment('Cartão de Débito')}>
                                     <Bank size={16} color='#8047F8' />
                                     Cartão de Débito
                                 </ button >
-                                < button type="button" onClick={handleSendDinheiro}>
+
+                                < button type="button" onClick={()=>handleChangeFormPayment('Dinheiro')}>
                                     <Money size={16} color='#8047F8' />
                                     Dinheiro
                                 </ button >
@@ -144,9 +164,13 @@ const [client, setClient] = useState<Client[]>([])
             <SectionInfo>
                 <Title>Cafés selecionados</Title>
                 <Info>
-                    <CoffeeSelected />
+                    
+                    <div id="cardSelected">
+                        <CoffeeSelected />
+                        <CoffeeSelected />
+                    </div>
 
-                    <div>
+                    <div id="info">
                         <div>
                             <p>Total de itens</p>
                             <span>ComponenteValue</span>
@@ -155,15 +179,17 @@ const [client, setClient] = useState<Client[]>([])
                             <p>Entrega</p>
                             <span>ComponenteValue</span>
                         </div>
-                        <div>
-                            <p className="teste">Total</p>
-                            <span>ComponenteValue</span>
+                        <div >
+                            <p className="lastInfo">Total</p>
+                            <span className="lastInfo">ComponenteValue</span>
                         </div>
-
-                        <button onClick={handleSubmit(handleConfirmOrder)} disabled={Object.keys(errors).length > 0} >
+                    </div>
+                    <NavLink to="/success" style={{textDecoration:'none'}}>
+                        <button id="buttonSend"  onClick={handleSubmit(handleConfirmOrder)} disabled={Object.keys(errors).length > 0} >
                             Confirmar Pedido
                         </button>
-                    </div>
+                    </NavLink>
+                   
                         
                 </Info>
             </SectionInfo>

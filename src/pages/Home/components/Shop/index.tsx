@@ -2,6 +2,8 @@ import { CoffeeCard } from "../Card";
 import { CardsContainer, ShopContainer } from "./styled";
 import { v4 as uuidv4 } from 'uuid';
 import { ICoffee } from "../Card";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ExpressoTradicional from "./assets/ExpressoTradicional.svg";
 import ExpressoAmericano from "./assets/ExpressoAmericano.svg";
@@ -17,7 +19,9 @@ import Cubano from "./assets/Cubano.svg";
 import Havaiano from "./assets/Havaiano.svg";
 import Arabe from "./assets/Árabe.svg";
 import Irlandes from "./assets/Irlandês.svg";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import { CoffeeSelected } from "../Card/CardSelected";
 
 
 
@@ -52,13 +56,18 @@ const cardProps:ICoffee[] = [
 ]
 
 
-export function Shop(props:ICoffee) {
+export function Shop() {
 const [MyCart, setMyCart] = useState([] as ICoffee[])
 
 
 
+useEffect(() => {
+    if(MyCart.length > 0) {
+        console.log(MyCart)
+    }
+},[MyCart])
 
-                            //LISTA NÃO ATUALIZANDO
+
 
 function handleAddCoffeeSelected(coffee:ICoffee) {
 
@@ -72,8 +81,8 @@ function handleAddCoffeeSelected(coffee:ICoffee) {
         src: coffee.src,
         info: coffee.info
     }
-    setMyCart([...MyCart, coffeeSelected])
-    console.log(MyCart)
+    setMyCart([coffeeSelected, ...MyCart])
+    return toast.success(`${coffeeSelected.quantity} ${coffeeSelected.name} adicionado ao carrinho`)
 }
 
 function onChangeQuantity(id:string, quantity:number, value:number) {
@@ -86,18 +95,33 @@ function onChangeQuantity(id:string, quantity:number, value:number) {
 
 
     return(
-        <ShopContainer>
-            <h1>Nossos cafés</h1>
-            <CardsContainer>
-                {cardProps.map((product) => (
-                    <CoffeeCard 
-                     key={product.id}
-                     dataCoffee={{...product}}
-                     onChangeQuantity={(quantity:number, value:number)=>onChangeQuantity(product.id, quantity, value)}
-                     onAddCoffeeSelected={()=>handleAddCoffeeSelected(product)}
-                    />
-                ))}
-            </CardsContainer>
-        </ShopContainer>
+
+        <div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover={false}
+                theme="colored"
+            />
+            <ShopContainer>
+                <h1>Nossos cafés</h1>
+                <CardsContainer>
+                    {cardProps.map((product) => (
+                        <CoffeeCard
+                         key={product.id}
+                         dataCoffee={{...product}}
+                         onChangeQuantity={(quantity:number, value:number)=>onChangeQuantity(product.id, quantity, value)}
+                         onAddCoffeeSelected={()=>handleAddCoffeeSelected(product)}
+                        />
+                    ))}
+                </CardsContainer>
+            </ShopContainer>
+        </div>
     )
 }

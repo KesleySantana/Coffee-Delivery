@@ -70,5 +70,13 @@ export const HeaderContainer = styled.header`
 
         border: none;
         border-radius: 6px;
+
+        cursor: pointer;
+
+        transition: 0.1s;
+
+        &:hover{
+            opacity: 0.7;
+        }
     }
 `;

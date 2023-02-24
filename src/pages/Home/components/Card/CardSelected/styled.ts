@@ -2,15 +2,22 @@ import styled from "styled-components";
 
 
 export const CoffeeSelectedContainer = styled.div`
-    width: 100rem;
-    height: 5rem;
 
-    background: ${(props) => props.theme["base-card"]};
 
-    #teste {
+    #container {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
+        justify-content: space-between;
+
+        background: ${(props) => props.theme["base-card"]};
+
+        gap: 1.5rem;
+        width: 100%;
+        height: 5rem;
+
+        border-bottom: 1px solid #E6E5E5;
+
     }
 
     img {
@@ -18,7 +25,7 @@ export const CoffeeSelectedContainer = styled.div`
         height: 4rem;
     }
 
-     #Action {
+     #action {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -36,14 +43,14 @@ export const CoffeeSelectedContainer = styled.div`
             color: ${(props) => props.theme["base-subtitle"]};
         }
 
-        #ButtonRemove {
+        #buttonRemove {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
 
-            width: 5.7rem;
-            height: 2rem;
+            width: 5.2rem;
+            height: 1.8rem;
             gap: 6px;
 
             background: ${(props) => props.theme["base-button"]};
@@ -53,10 +60,35 @@ export const CoffeeSelectedContainer = styled.div`
             cursor: pointer;
 
             font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            font-size: 11px;
+            font-weight: 500;
+            font-size: 10px;
             color: ${(props) => props.theme["base-text"]};
 
         }
+
+    }
+
+    #containerPrice {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        height: 100%;
+        
+    }
+
+    #price {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+
+        text-align: right;
+
+        color: ${(props) => props.theme["base-text"]};
+
+        cursor: default;
     }
 `;
+

@@ -114,6 +114,10 @@ export const Form = styled.form`
         border: 1px solid #E6E5E5;
         border-radius: 4px;
     }
+    
+    #Nome {
+        width: 21.75rem;
+    }
 
     #CEP {
         width: 12.5rem;
@@ -274,13 +278,14 @@ export const SectionInfo = styled.div`
     align-items: flex-start;
     gap: 1rem;
 `;
+
 export const Info = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     
-    padding: 0 2rem;
+    padding: 20px;
 
     width: 23rem;
     height: 25rem;
@@ -288,13 +293,21 @@ export const Info = styled.div`
     background: ${(props) => props.theme["base-card"]};
     border-radius: 6px 44px;
 
-    div {
+    
+    #cardSelected {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+
+
+    #info {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
 
-        gap: 1rem;
         width: 23rem;
         height: 6rem;
 
@@ -318,42 +331,42 @@ export const Info = styled.div`
                 color: ${(props) => props.theme["base-text"]};
             }
 
-            .teste {
+            .lastInfo {
                 font-weight: 700;
-                font-size: 1.25rem;
+                font-size: 1.2rem;
                 color: ${(props) => props.theme["base-subtitle"]};
             }
 
         }
-
-        button {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 8px;
-        
-        width: 20rem;
-        height: 2.9rem;
-
-        background: ${(props) => props.theme.yellow};
-        border-radius: 4px 8px;
-
-        text-transform: uppercase;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 700;
-        font-size: 14px;
-
-        color: ${(props) => props.theme.white};
-
-        cursor: pointer;
-
-        &:disabled {
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-    }
     }
 
+        #buttonSend {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 8px;
+            
+            width: 20rem;
+            height: 2.9rem;
+
+            background: ${(props) => props.theme.yellow};
+            border-radius: 4px 8px;
+
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+
+            color: ${(props) => props.theme.white};
+
+            cursor: pointer;
+
+
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 0.6;
+            }
+    }
 
 `;
