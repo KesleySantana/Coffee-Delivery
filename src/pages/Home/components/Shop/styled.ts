@@ -14,6 +14,7 @@ export const ShopContainer = styled.main`
         
         color: ${(props) => props.theme["base-subtitle"]};
     }
+
 `;
 
 
@@ -27,4 +28,5 @@ export const CardsContainer = styled.div`
     height: 85rem;
 
 `;
+
 

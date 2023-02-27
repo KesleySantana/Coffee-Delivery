@@ -20,7 +20,7 @@ import Havaiano from "./assets/Havaiano.svg";
 import Arabe from "./assets/Árabe.svg";
 import Irlandes from "./assets/Irlandês.svg";
 
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { CoffeeSelected } from "../Card/CardSelected";
 
 
@@ -97,6 +97,8 @@ function onChangeQuantity(id:string, quantity:number, value:number) {
     return(
 
         <div>
+        
+            <ShopContainer>
             <ToastContainer
                 position="top-right"
                 autoClose={2000}
@@ -109,7 +111,6 @@ function onChangeQuantity(id:string, quantity:number, value:number) {
                 pauseOnHover={false}
                 theme="colored"
             />
-            <ShopContainer>
                 <h1>Nossos cafés</h1>
                 <CardsContainer>
                     {cardProps.map((product) => (
