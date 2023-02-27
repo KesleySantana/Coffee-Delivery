@@ -20,7 +20,7 @@ export interface ICoffee {
     selected: boolean,
 }
 
-interface CardCoffee {
+export interface CardCoffee {
     dataCoffee:ICoffee,
     onAddCoffeeSelected(dataCoffee:{}):void,
     onChangeQuantity(quantity:number, value:number):void

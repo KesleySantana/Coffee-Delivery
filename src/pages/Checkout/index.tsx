@@ -9,6 +9,10 @@ import { useEffect, useState } from "react";
 import { NavLink } from 'react-router-dom';
 
 
+import { useContext } from "react";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
+
+
 interface IClient {
     nome: string,
     CEP: string,
@@ -35,6 +39,9 @@ type ConfirmedOrder = zod.infer<typeof confirmedOrderValidationSchema>
 
 
 export function Checkout() {
+
+const { MyCart, MyCartLength, FreteOfCoffee, SumValueCoffee} = useContext(CoffeeContext)
+
 const [client, setClient] = useState({} as IClient[])
 const [formPayment, setFormPayment] = useState<string>('')
 
@@ -166,22 +173,25 @@ const [formPayment, setFormPayment] = useState<string>('')
                 <Info>
                     
                     <div id="cardSelected">
-                        <CoffeeSelected />
-                        <CoffeeSelected />
+                        {MyCart.map((item)=> (
+                            <CoffeeSelected 
+                                key={item.id}
+                                dataCoffee={{...item}}/>
+                        ))}
                     </div>
 
                     <div id="info">
                         <div>
                             <p>Total de itens</p>
-                            <span>ComponenteValue</span>
+                            <span>R$ {SumValueCoffee}</span>
                         </div>
                         <div>
                             <p>Entrega</p>
-                            <span>ComponenteValue</span>
+                            <span>R$ {FreteOfCoffee}</span>
                         </div>
                         <div >
                             <p className="lastInfo">Total</p>
-                            <span className="lastInfo">ComponenteValue</span>
+                            <span className="lastInfo">R$ {SumValueCoffee + FreteOfCoffee}</span>
                         </div>
                     </div>
                     <NavLink to="/success" style={{textDecoration:'none'}}>
