@@ -288,7 +288,7 @@ export const Info = styled.div`
     padding: 20px;
 
     width: 23rem;
-    height: 25rem;
+    height: 28rem;
 
     background: ${(props) => props.theme["base-card"]};
     border-radius: 6px 44px;
@@ -298,6 +298,13 @@ export const Info = styled.div`
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    #infoContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      
     }
 
 
@@ -311,6 +318,8 @@ export const Info = styled.div`
         width: 23rem;
         height: 6rem;
 
+        
+
         div {
             display: flex;
             flex-direction: row;
@@ -319,6 +328,7 @@ export const Info = styled.div`
         
             width: 20rem;
             height: 1.3rem;
+
 
             p {
                 font-family: 'Roboto', sans-serif;
@@ -346,6 +356,7 @@ export const Info = styled.div`
             align-items: center;
             justify-content: center;
             padding: 12px 8px;
+
             
             width: 20rem;
             height: 2.9rem;

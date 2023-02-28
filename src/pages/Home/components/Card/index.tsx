@@ -2,11 +2,13 @@ import { Card } from "./styled"
 
 
 import { Coffee, Minus, Plus, ShoppingCartSimple } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Amount, BuyContainer, Counter, Price, PriceAmount } from "./styled";
 
 import { v4 as uuidv4 } from 'uuid';
 import { ButtonHTMLAttributes } from "react";
+
+import { CoffeeContext } from "../../../../contexts/CoffeeContext";
 
 
 export interface ICoffee {
@@ -28,10 +30,12 @@ export interface CardCoffee {
 
 
 
-export function CoffeeCard({dataCoffee, onAddCoffeeSelected, onChangeQuantity}:CardCoffee) {
-const [quantityCoffee, setQuantityCoffee] = useState<number>(1)
-const [valueCoffee, setValueCoffee] = useState<number>(9.65)
 
+
+
+export function CoffeeCard({dataCoffee, onAddCoffeeSelected, onChangeQuantity}:CardCoffee) {
+    const [quantityCoffee, setQuantityCoffee] = useState<number>(1)
+    const [valueCoffee, setValueCoffee] = useState<number>(9.65)
     
 
 function handleAddCoffeeSelected() {

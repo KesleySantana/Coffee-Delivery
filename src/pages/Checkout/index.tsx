@@ -40,7 +40,7 @@ type ConfirmedOrder = zod.infer<typeof confirmedOrderValidationSchema>
 
 export function Checkout() {
 
-const { MyCart, MyCartLength, FreteOfCoffee, SumValueCoffee} = useContext(CoffeeContext)
+const { MyCart, MyCartLength, totalFormated, freteOfCoffeeFormated, SumValueCoffeeFormated} = useContext(CoffeeContext)
 
 const [client, setClient] = useState({} as IClient[])
 const [formPayment, setFormPayment] = useState<string>('')
@@ -61,9 +61,9 @@ const [formPayment, setFormPayment] = useState<string>('')
 
     useEffect(()=> {
         if(client.length > 0) {
-            console.log(client, formPayment)
+            console.log(client)
         }
-    }, [client, formPayment])
+    }, [client])
 
 
     function handleConfirmOrder(data:ConfirmedOrder) {
@@ -75,21 +75,14 @@ const [formPayment, setFormPayment] = useState<string>('')
             cidade:data.Cidade,
             bairro:data.Bairro,
             UF:data.UF.toUpperCase(),
+            Pagamento: formPayment
         }
         setClient([newClient])
         reset()
     }
 
     function handleChangeFormPayment(form: 'Dinheiro' | 'Cartão de Crédito' | 'Cartão de Débito') {
-        if(form === 'Dinheiro'){
-            setFormPayment('Dinheiro')
-        }
-        if(form === 'Cartão de Crédito'){
-            setFormPayment('Cartão de Crédito')
-        }
-        if(form === 'Cartão de Débito'){
-            setFormPayment('Cartão de Débito')
-        }
+        setFormPayment(form)
     }   
 
 
@@ -150,7 +143,7 @@ const [formPayment, setFormPayment] = useState<string>('')
                                 </div>
                             </Label>
                             <Payment>
-                                < button type="button" >
+                                < button type="button" onClick={()=>handleChangeFormPayment('Cartão de Crédito')} >
                                     <CreditCard size={16} color='#8047F8' />
                                     Cartão de Crédito
                                 </ button >             
@@ -180,25 +173,28 @@ const [formPayment, setFormPayment] = useState<string>('')
                         ))}
                     </div>
 
-                    <div id="info">
-                        <div>
-                            <p>Total de itens</p>
-                            <span>R$ {SumValueCoffee}</span>
+                    <div id="infoContainer">
+                        <div id="info">
+                            <div>
+                                <p>Total de itens</p>
+                                <span>{SumValueCoffeeFormated}</span>
+                            </div>
+                            <div>
+                                <p>Entrega</p>
+                                <span>{freteOfCoffeeFormated}</span>
+                            </div>
+                            <div >
+                                <p className="lastInfo">Total</p>
+                                <span className="lastInfo">{totalFormated}</span>
+                            </div>
                         </div>
-                        <div>
-                            <p>Entrega</p>
-                            <span>R$ {FreteOfCoffee}</span>
-                        </div>
-                        <div >
-                            <p className="lastInfo">Total</p>
-                            <span className="lastInfo">R$ {SumValueCoffee + FreteOfCoffee}</span>
-                        </div>
+                        <NavLink to="/success" style={{textDecoration:'none'}}>
+                                <button id="buttonSend" onClick={handleSubmit(handleConfirmOrder)} disabled={Object.keys(errors).length > 0} >
+                                    Confirmar Pedido
+                                </button>
+                        </NavLink>
+                        
                     </div>
-                    <NavLink to="/success" style={{textDecoration:'none'}}>
-                        <button id="buttonSend"  onClick={handleSubmit(handleConfirmOrder)} disabled={Object.keys(errors).length > 0} >
-                            Confirmar Pedido
-                        </button>
-                    </NavLink>
                    
                         
                 </Info>

@@ -18,6 +18,7 @@ import Irlandes from "../assets/assetsCoffee/Irlandês.svg";
 
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from "react-toastify";
+import { number } from "zod";
 
 
 interface ICoffeeContextProviderProps {
@@ -27,15 +28,13 @@ interface ICoffeeContextProviderProps {
 interface ICoffeeContext {
     cardProps: ICoffee[],
     MyCart: ICoffee[],
-    MyCartLength:number,
-    FreteOfCoffee:number,
-    SumValueCoffee: number,
+    MyCartLength: number,
+    freteOfCoffeeFormated: string,
+    totalFormated: string,
+    SumValueCoffeeFormated: string,
     handleAddCoffeeSelected: (coffee:ICoffee) => void,
-    handleRemoveCoffeeSelected: (coffee:string) => void
+    handleRemoveCoffeeSelected: (coffee:string) => void,
 }
-
-
-export const CoffeeContext = createContext({} as ICoffeeContext)
 
 const cardProps:ICoffee[] = [
     { id:uuidv4(),  src:ExpressoTradicional, type:"Tradicional", name:"Expresso Tradicional", info:"O tradicional café feito com água quente e grãos moídos", quantity: 1, value: 9.65, selected: false },
@@ -69,13 +68,32 @@ const cardProps:ICoffee[] = [
 
 
 
+
+
+export const CoffeeContext = createContext({} as ICoffeeContext)
+
+
+
+
 export function CoffeeContextProvider({ children }:ICoffeeContextProviderProps) {
+
+
+
 const [MyCart, setMyCart] = useState([] as ICoffee[])
 const MyCartLength = MyCart.length
-const FreteOfCoffee = 4.75
+
 const SumValueCoffee = MyCart.reduce((total = 0, item)=>{
     return total + (item.value)
 },0)
+const SumValueCoffeeFormated = SumValueCoffee.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
+const FreteOfCoffee = 4.75
+const freteOfCoffeeFormated = FreteOfCoffee.toLocaleString('pt-BR', {style:'currency', currency:'BRL'})
+const total = FreteOfCoffee + SumValueCoffee
+const totalFormated = total.toLocaleString('pt-BR', {style:'currency', currency:'BRL'})
+
+
+
 
 // useEffect(() => {
 //     if(MyCartLength > 0) {
@@ -83,13 +101,13 @@ const SumValueCoffee = MyCart.reduce((total = 0, item)=>{
 //     }
 // },[MyCart])
 
-
 function handleRemoveCoffeeSelected(id:string) {
-    const MycartWithoutCoffeeDelete = MyCart.filter(coffeeSelected => coffeeSelected.id !== id)
-    setMyCart(MycartWithoutCoffeeDelete)
-}
-
-
+    if(MyCartLength > 1) {
+        const MycartWithoutCoffeeDelete = MyCart.filter(coffeeSelected => coffeeSelected.id !== id)
+        setMyCart(MycartWithoutCoffeeDelete)
+    }
+    }
+    
 
 function handleAddCoffeeSelected(coffee:ICoffee) {
 
@@ -110,16 +128,18 @@ function handleAddCoffeeSelected(coffee:ICoffee) {
 
 
 
+
     return(
         <CoffeeContext.Provider 
             value={{
                 cardProps,
                 MyCart,
                 MyCartLength,
-                FreteOfCoffee,
-                SumValueCoffee,
+                freteOfCoffeeFormated,
+                totalFormated,
+                SumValueCoffeeFormated, 
                 handleAddCoffeeSelected,
-                handleRemoveCoffeeSelected
+                handleRemoveCoffeeSelected,  
             }}>
 
             {children}
