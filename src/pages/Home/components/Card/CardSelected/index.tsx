@@ -30,7 +30,6 @@ const { MyCart, handleRemoveCoffeeSelected} = useContext(CoffeeContext)
                         </Counter>
                         <button onClick={()=> handleRemoveCoffeeSelected(dataCoffee.id)} id="buttonRemove" type="button">
                             <Trash size={14} color="#8047F8"/>
-                            Remover
                         </button>
                     </div>
                 </div>

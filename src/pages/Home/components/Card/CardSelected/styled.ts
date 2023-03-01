@@ -50,7 +50,7 @@ export const CoffeeSelectedContainer = styled.div`
             align-items: center;
             justify-content: center;
 
-            gap: 0.5rem;
+            gap: 1rem;
         }
 
         #buttonRemove {
@@ -59,7 +59,7 @@ export const CoffeeSelectedContainer = styled.div`
             justify-content: center;
             align-items: center;
 
-            width: 5.2rem;
+            width: 2rem;
             height: 1.8rem;
             gap: 6px;
 

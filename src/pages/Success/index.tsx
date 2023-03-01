@@ -1,8 +1,14 @@
 import { Cactus, CurrencyDollar, MapPin } from "phosphor-react";
 import { InfoPay, InfoPerson, InfoPlace, OrderInfo, StatePay, StatePerson, StatePlace, SuccessContainer } from "./styled";
 import Illustration from './assets/Illustration.svg';
+import { useContext, useEffect } from "react";
+import { ClientContext } from "../../contexts/ClientContext";
 
 export function Success() {
+const { client } = useContext(ClientContext)
+
+console.log(client)
+
     return(
         <SuccessContainer>
             <div className="Title">
@@ -17,7 +23,8 @@ export function Success() {
                             <Cactus size={16} weight="fill" color="#FFFFFF"/>
                         </span>
                         <StatePerson>
-                            <p>Obrigado por confiar em nós ...</p>
+                            <p>Obrigado por confiar em nós</p>
+                            <p>value</p>
                         </StatePerson>
                     </InfoPerson>
                     <InfoPlace>
@@ -25,7 +32,8 @@ export function Success() {
                             <MapPin size={16} weight="fill" color="#FFFFFF"/>
                         </span>
                         <StatePlace>
-                            <p>Entrega em ...</p>
+                            <p>Entrega em</p>
+                            <p>value</p>
                         </StatePlace>
                     </InfoPlace>
                     <InfoPay>
@@ -33,7 +41,8 @@ export function Success() {
                             <CurrencyDollar size={16} color="#FFFFFF" />
                         </span>
                         <StatePay>
-                            <p>Pagamento na entrega ...</p>
+                            <p>Pagamento na entrega</p>
+                            <p>value</p>
                         </StatePay>
                     </InfoPay>
                 </OrderInfo>

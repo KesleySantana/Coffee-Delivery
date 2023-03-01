@@ -8,6 +8,7 @@ import { defaultTheme } from './styles/themes/default';
 import { GlobalStyle } from './styles/themes/global';
 import { Router } from './Router';
 import { CoffeeContextProvider } from './contexts/CoffeeContext';
+import { ClientContextProvider } from './contexts/ClientContext';
 
 export function App() {
 
@@ -15,7 +16,9 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <CoffeeContextProvider>
-          <Router /> 
+          <ClientContextProvider>
+            <Router /> 
+          </ClientContextProvider>
         </CoffeeContextProvider>
       </BrowserRouter>
       <GlobalStyle />

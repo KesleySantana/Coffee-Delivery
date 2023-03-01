@@ -36,6 +36,9 @@ interface ICoffeeContext {
     handleRemoveCoffeeSelected: (coffee:string) => void,
 }
 
+
+
+
 const cardProps:ICoffee[] = [
     { id:uuidv4(),  src:ExpressoTradicional, type:"Tradicional", name:"Expresso Tradicional", info:"O tradicional café feito com água quente e grãos moídos", quantity: 1, value: 9.65, selected: false },
     
@@ -73,11 +76,7 @@ const cardProps:ICoffee[] = [
 export const CoffeeContext = createContext({} as ICoffeeContext)
 
 
-
-
 export function CoffeeContextProvider({ children }:ICoffeeContextProviderProps) {
-
-
 
 const [MyCart, setMyCart] = useState([] as ICoffee[])
 const MyCartLength = MyCart.length
@@ -108,7 +107,6 @@ function handleRemoveCoffeeSelected(id:string) {
     }
     }
     
-
 function handleAddCoffeeSelected(coffee:ICoffee) {
 
     const coffeeSelected = {
@@ -124,6 +122,7 @@ function handleAddCoffeeSelected(coffee:ICoffee) {
     setMyCart([coffeeSelected, ...MyCart])
     return toast.success(`${coffeeSelected.quantity} ${coffeeSelected.name} adicionado ao carrinho`)
 }
+
 
 
 

@@ -11,17 +11,18 @@ import { NavLink } from 'react-router-dom';
 
 import { useContext } from "react";
 import { CoffeeContext } from "../../contexts/CoffeeContext";
+import { ClientContext } from "../../contexts/ClientContext";
 
 
-interface IClient {
-    nome: string,
-    CEP: string,
-    rua:string,
-    numero:string,
-    cidade:string,
-    bairro:string,
-    UF:string
-}
+// interface IClient {
+//     nome: string,
+//     CEP: string,
+//     rua:string,
+//     numero:string,
+//     cidade:string,
+//     bairro:string,
+//     UF:string
+// }
 
 
 const confirmedOrderValidationSchema = zod.object({
@@ -35,17 +36,18 @@ const confirmedOrderValidationSchema = zod.object({
     UF: zod.string().min(2).max(2)
 })
 
-type ConfirmedOrder = zod.infer<typeof confirmedOrderValidationSchema>
+export type ConfirmedOrder = zod.infer<typeof confirmedOrderValidationSchema>
 
 
 export function Checkout() {
 
 const { MyCart, MyCartLength, totalFormated, freteOfCoffeeFormated, SumValueCoffeeFormated} = useContext(CoffeeContext)
+const { client, handleChangeFormPayment, handleConfirmOrder } = useContext(ClientContext)
 
-const [client, setClient] = useState({} as IClient[])
-const [formPayment, setFormPayment] = useState<string>('')
+// const [client, setClient] = useState({} as IClient[])
+// const [formPayment, setFormPayment] = useState<string>('')
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, watch, reset } = useForm<ConfirmedOrder>({
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ConfirmedOrder>({
         resolver: zodResolver(confirmedOrderValidationSchema),
         defaultValues: {
             Nome: '',
@@ -59,31 +61,31 @@ const [formPayment, setFormPayment] = useState<string>('')
         }
     })
 
-    useEffect(()=> {
-        if(client.length > 0) {
-            console.log(client)
-        }
-    }, [client])
+    // useEffect(()=> {
+    //     if(client.length > 0) {
+    //         console.log(client)
+    //     }
+    // }, [client])
 
 
-    function handleConfirmOrder(data:ConfirmedOrder) {
-        const newClient = {
-            nome: data.Nome,
-            CEP: data.CEP,
-            rua:data.Rua,
-            numero: data.Numero,
-            cidade:data.Cidade,
-            bairro:data.Bairro,
-            UF:data.UF.toUpperCase(),
-            Pagamento: formPayment
-        }
-        setClient([newClient])
-        reset()
-    }
+    // function handleConfirmOrder(data:ConfirmedOrder) {
+    //     const newClient = {
+    //         nome: data.Nome,
+    //         CEP: data.CEP,
+    //         rua:data.Rua,
+    //         numero: data.Numero,
+    //         cidade:data.Cidade,
+    //         bairro:data.Bairro,
+    //         UF:data.UF.toUpperCase(),
+    //         Pagamento: formPayment
+    //     }
+    //     setClient([newClient])
+    //     reset()
+    // }
 
-    function handleChangeFormPayment(form: 'Dinheiro' | 'Cartão de Crédito' | 'Cartão de Débito') {
-        setFormPayment(form)
-    }   
+    // function handleChangeFormPayment(form: 'Dinheiro' | 'Cartão de Crédito' | 'Cartão de Débito') {
+    //     setFormPayment(form)
+    // }   
 
 
     return(
@@ -117,7 +119,7 @@ const [formPayment, setFormPayment] = useState<string>('')
                                 <input type="text" placeholder="Número" id="Numero" {...register('Numero', {
                                     required:true,
                                     })}/>
-                                <input type= "text" placeholder="Complemento    Opcional" id="Complemento" {...register('Complemento')}/>
+                                <input type= "text" placeholder="Complemento" id="Complemento" {...register('Complemento')}/>
                             </div>
                             <div className="DivInputs">
                                 <input type="text" placeholder="Bairro" id="Bairro" {...register('Bairro', {
@@ -188,12 +190,19 @@ const [formPayment, setFormPayment] = useState<string>('')
                                 <span className="lastInfo">{totalFormated}</span>
                             </div>
                         </div>
-                        <NavLink to="/success" style={{textDecoration:'none'}}>
-                                <button id="buttonSend" onClick={handleSubmit(handleConfirmOrder)} disabled={Object.keys(errors).length > 0} >
-                                    Confirmar Pedido
+                
+                        <div id="buttonsContainer">
+                            <button className="buttonSend" id="buttonConfirm" onClick={handleSubmit(handleConfirmOrder)} disabled={Object.keys(errors).length > 0 || Object.keys(client).length > 0} >
+                                Confirmar Pedido
+                            </button>
+                            <NavLink to="/success" style={{textDecoration:'none'}}>
+                                <button className="buttonSend" type="button" id="buttonSend" disabled={Object.keys(client).length === 0} >
+                                    Finalizar
                                 </button>
-                        </NavLink>
-                        
+                            </NavLink>
+                            
+                        </div>
+                    
                     </div>
                    
                         

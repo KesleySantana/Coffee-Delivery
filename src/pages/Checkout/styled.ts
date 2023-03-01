@@ -350,7 +350,17 @@ export const Info = styled.div`
         }
     }
 
-        #buttonSend {
+        #buttonsContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .buttonSend {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -358,16 +368,16 @@ export const Info = styled.div`
             padding: 12px 8px;
 
             
-            width: 20rem;
+            width: 10rem;
             height: 2.9rem;
 
-            background: ${(props) => props.theme.yellow};
+            background: ${(props) => props.theme.green};
             border-radius: 4px 8px;
 
             text-transform: uppercase;
             font-family: 'Roboto', sans-serif;
-            font-weight: 700;
-            font-size: 14px;
+            font-weight: 400;
+            font-size: 12px;
 
             color: ${(props) => props.theme.white};
 
@@ -378,6 +388,15 @@ export const Info = styled.div`
                 cursor: not-allowed;
                 opacity: 0.6;
             }
-    }
+        }
+
+        #buttonConfirm {
+
+        }
+
+        #buttonSend {
+            background: ${(props) => props.theme.yellow};
+            width: 5rem;
+        }
 
 `;
