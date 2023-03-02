@@ -59,10 +59,11 @@ export const OrderInfo = styled.div`
     width: 28rem;
     height: 15rem;
 
+    
+    border: 1px solid ;
+    border-image: linear-gradient(to right, #DBAC2C, #8047F8) 1;
     border-radius: 6px 36px;
 
-    border: 1px solid ;
-    /* background: linear-gradient(to right, #DBAC2C, #8047F8); */
 `;
 
 export const InfoPerson = styled.div`
@@ -167,4 +168,14 @@ export const InfoPay = styled.div`
             background: ${(props) => props.theme["yellow-dark"]};
             border-radius: 1000px;
         }
+`;
+
+export const State = styled.div`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+
+    color: ${(props) => props.theme["base-text"]};
+
+    cursor: default;
 `;

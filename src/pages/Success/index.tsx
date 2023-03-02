@@ -1,5 +1,5 @@
 import { Cactus, CurrencyDollar, MapPin } from "phosphor-react";
-import { InfoPay, InfoPerson, InfoPlace, OrderInfo, StatePay, StatePerson, StatePlace, SuccessContainer } from "./styled";
+import { InfoPay, InfoPerson, InfoPlace, OrderInfo, State, StatePay, StatePerson, StatePlace, SuccessContainer } from "./styled";
 import Illustration from './assets/Illustration.svg';
 import { useContext, useEffect } from "react";
 import { ClientContext } from "../../contexts/ClientContext";
@@ -24,7 +24,9 @@ console.log(client)
                         </span>
                         <StatePerson>
                             <p>Obrigado por confiar em nós</p>
-                            <p>value</p>
+                            {client.map(item => (
+                               <State>{item.nome}</State>
+                            ))}
                         </StatePerson>
                     </InfoPerson>
                     <InfoPlace>
@@ -33,7 +35,9 @@ console.log(client)
                         </span>
                         <StatePlace>
                             <p>Entrega em</p>
-                            <p>value</p>
+                            {client.map((item) => (
+                                <State>Rua {item.rua}, {item.numero}, {item.bairro} - {item.cidade}, {item.UF}</State>
+                            ))}
                         </StatePlace>
                     </InfoPlace>
                     <InfoPay>
@@ -42,7 +46,9 @@ console.log(client)
                         </span>
                         <StatePay>
                             <p>Pagamento na entrega</p>
-                            <p>value</p>
+                            {client.map((item) => (
+                                <State>{item.pagamento}</State>
+                            ))}
                         </StatePay>
                     </InfoPay>
                 </OrderInfo>
