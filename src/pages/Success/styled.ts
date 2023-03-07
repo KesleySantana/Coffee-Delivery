@@ -8,9 +8,40 @@ export const SuccessContainer = styled.main`
     justify-content: space-around;
 
     padding: 0 10rem;
-    width: 1440px;
+    width: 100%;
 
     gap: 2rem;
+
+    @media(max-width: 1170px){
+        & {
+            width: 70%;
+            padding: 0;
+        }
+    }
+
+    @media(max-width: 1040px){
+        & {
+            width: 60%;
+        }
+    }
+    @media(max-width: 900px){
+        & {
+            width: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @media(max-width:750px){
+        &{
+            width: 40%;
+        }
+    }
+    @media(max-width:640px){
+        &{
+            width: 30%;
+        }
+    }
 
     .Title {
         display: flex;
@@ -45,6 +76,12 @@ export const SuccessContainer = styled.main`
         img {
             width: 24rem;
         }
+
+        @media(max-width: 900px){
+        & {
+            flex-direction: column;
+        }
+    }
     }
 
 `;

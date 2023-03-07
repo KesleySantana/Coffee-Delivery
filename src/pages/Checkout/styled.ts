@@ -3,12 +3,33 @@ import styled from "styled-components";
 
 export const CheckoutContainer = styled.form`
     display: flex;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    flex-direction: row;
+    width: 90%;
 
-    padding: 0 10rem;
-    width: 1440px;
+
+    @media(max-width: 1290px){
+        & {
+            width: 80%;
+        }
+    }
+
+    @media(max-width: 1170px){
+        & {
+            width: 70%;
+            gap: 2rem;
+        }
+    }
+
+    @media(max-width: 1040px){
+        & {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+        
+    
 `;
 
 export const Title = styled.title`
@@ -29,27 +50,39 @@ export const SectionForm = styled.div`
     
 
     gap: 1rem;
+
+    @media(max-width:640px){
+        &{
+            align-items:center;
+        }
+    }
 `;
 
 export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
 
-    padding: 2rem;
     gap: 2rem;
 
-    width: 40rem;
+    width: 100%;
     height: 21rem;
 
     background: ${(props) => props.theme["base-card"]};
     border-radius: 6px;
-
+/* 
     #form {
         display: flex;
         flex-direction: column;
 
         gap: 2.5rem;
+    } */
+
+    @media(max-width:640px){
+        &{
+            width: 90%;
+        }
     }
 `;
 
@@ -59,8 +92,18 @@ export const TitleForm = styled.div`
     align-items: flex-start;
     gap: 8px;
 
-    width: 35rem;
+    padding-left: 2rem;
+
+    width: 100%;
     height: 2rem;
+
+    @media(max-width:640px){
+        &{
+            padding-left: 0;
+        }
+    }
+
+    
 
     div {
         display: flex;
@@ -89,6 +132,8 @@ export const TitleForm = styled.div`
             color: ${(props) => props.theme["base-text"]};
         }
     }
+
+    
 `;
 
 export const Form = styled.form`
@@ -96,9 +141,11 @@ export const Form = styled.form`
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+   
 
-    width: 35rem;
+    width: 100%;
     height: 13.5rem;
+
 
     input {
         display: flex;
@@ -113,29 +160,34 @@ export const Form = styled.form`
 
         border: 1px solid #E6E5E5;
         border-radius: 4px;
+        
+        @media(max-width:640px){
+            &{
+                height: 2.3rem; 
+            }
+        }
+
     }
     
     #Nome {
-        width: 21.75rem;
+        width: 80%;
     }
 
-    #CEP {
-        width: 12.5rem;
-
+    #CEP { 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
-        }
-   
+        } 
 }
 
     #Rua {
-        width: 35rem;
+        width:100%
     }
 
+
     #Numero {
-        width: 12.5rem;
+        width: 30%;
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -144,7 +196,7 @@ export const Form = styled.form`
     }
 
     #Complemento {
-        width: 21.75rem;
+        width: 70%;
 
         &::placeholder {
             display: flex;
@@ -155,15 +207,15 @@ export const Form = styled.form`
     }
 
     #Bairro {
-        width: 12.5rem;
+        width: 45%;
     }
 
     #Cidade {
-        width: 17.25rem;
+        width: 45%;
     }
 
     #UF {
-        width: 3.75rem;
+        width: 10%;
         text-transform: uppercase;
     }
 
@@ -173,6 +225,7 @@ export const Form = styled.form`
         flex-direction: row;
         align-items: center;
         gap: 12px;
+        width: 100%;
     }
 `;
 
@@ -180,17 +233,24 @@ export const PayContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    padding: 2rem;
     gap: 2rem;
 
-    right: 1rem;
+    /* right: 1rem; */
 
-    width: 40rem;
+    width: 100%;
     height: 11rem;
 
     background: ${(props) => props.theme["base-card"]};
     border-radius: 6px;
+
+    @media(max-width:640px){
+        &{
+            width: 90%;
+            
+        }
+    }
 `;
 export const Label = styled.div`
     display: flex;
@@ -199,7 +259,7 @@ export const Label = styled.div`
     
     gap: 8px;
 
-    width: 35rem;
+    width: 100%;
     height: 2.75rem;
 
     div {
@@ -236,8 +296,14 @@ export const Payment = styled.div`
 
     gap: 12px;
 
-    width: 35rem;
+    width: 100%;
     height: 3rem;
+
+    @media(max-width:640px){
+        &{
+            width: 90%;
+        }
+    }
 
     button {
         display: flex;

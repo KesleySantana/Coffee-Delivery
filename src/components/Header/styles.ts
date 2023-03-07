@@ -7,10 +7,12 @@ export const HeaderContainer = styled.header`
     justify-content: space-between;
 
     margin-bottom: 2rem;
-
-    padding: 1.5rem 10rem;
-    width: 1440px;
+    width: 90%;
     height: 6.5rem;
+
+    /* padding: 1.5rem 10rem; */
+
+    /* width: 1440px; */
 
 
    
@@ -77,6 +79,40 @@ export const HeaderContainer = styled.header`
 
         &:hover{
             opacity: 0.7;
+        }
+    }
+
+    @media(max-width: 1290px){
+        & {
+            width: 80%;
+        }
+    }
+
+    @media(max-width: 1170px){
+        & {
+            width: 70%;
+        }
+    }
+
+    @media(max-width: 1040px){
+        & {
+            width: 60%;
+        }
+    }
+    @media(max-width: 900px){
+        & {
+            width: 50%;
+        }
+    }
+
+    @media(max-width:750px){
+        &{
+            width: 40%;
+        }
+    }
+    @media(max-width:640px){
+        &{
+            width: 30%;
         }
     }
 `;

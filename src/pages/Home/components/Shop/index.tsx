@@ -47,18 +47,18 @@ function onChangeQuantity(id:string, quantity:number, value:number) {
         <div>
         
             <ShopContainer>
-            <ToastContainer
-                position="top-right"
-                autoClose={800}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover={false}
-                theme="colored"
-            />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={800}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover={false}
+                    theme="colored"
+                />
                 <h1>Nossos cafés</h1>
                 <CardsContainer>
                     {cardProps.map((product) => (

@@ -5,24 +5,40 @@ import styled from "styled-components";
 export const AsideContainer = styled.aside`
     display: flex;
     flex-direction: row;
-    /* padding-top: 4rem; */
-
     align-items: center;
     justify-content: space-between;
-
-    gap: 5rem;
+    width: 100%;
 
     img {
         width: 25rem;
+
+        @media(max-width:750px){
+        &{
+            display: none;
+        }
     }
+    }
+
+    @media(max-width: 900px){
+        & {
+            flex-direction: column-reverse;
+        }
+    }
+
 `;
 
 export const Section = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
     gap: 2rem;  
 
+    @media(max-width:750px){
+        &{
+            align-items: center;
+        }
+ }
 
 `;
 
@@ -54,6 +70,14 @@ export const Title = styled.div`
 export const Itens = styled.div`
     display: grid;
     grid: repeat(2, 3rem) /auto-flow 20rem;
+    width: 100%;
+
+    @media(max-width:640px){
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 
 `;
 

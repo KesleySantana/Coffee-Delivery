@@ -4,6 +4,8 @@ import styled from "styled-components";
 export const ShopContainer = styled.main`
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 
     padding-top: 4rem;
 
@@ -20,13 +22,14 @@ export const ShopContainer = styled.main`
 
 export const CardsContainer = styled.div`
     display: grid;
-    grid-template-columns: 22rem 22rem 22rem 22rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     row-gap: 3rem;
     padding-top: 3rem;
 
-    width: 70rem;
-    height: 85rem;
+    width: 100%;
+    height: 100%;
 
+    /* 22 */
 `;
 
 
